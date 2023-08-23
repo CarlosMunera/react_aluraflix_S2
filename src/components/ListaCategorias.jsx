@@ -1,8 +1,13 @@
 import VideoCard from "./VideoCard"
-import { datos } from "../data/archivos_iniciales"
+import { obtenerDatos } from "../api/api"
+import { useEffect, useState } from "react"
 
 const ListaCategorias = () => {
+    const [categorias,setCategorias] = useState([])
     
+    useEffect(()=>{
+        obtenerDatos('/categorias',setCategorias)
+    },[])
 
     return (
         <main className="categorias">
@@ -10,7 +15,7 @@ const ListaCategorias = () => {
             <p className="sr-only">AluraFlix plataforma para registrar y ver nueestros videos favoritos</p>
             <div className="categorias_Listas">
                 {
-                    datos.categorias.map((categoria) => {
+                    categorias.map((categoria) => {
                         const {id, nombre, descripcion, color} = categoria
 
                         let colorLista = {

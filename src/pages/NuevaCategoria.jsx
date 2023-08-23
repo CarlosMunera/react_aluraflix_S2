@@ -1,12 +1,18 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import ButtonForm from '../components/ButtonForm'
 import CampoTexto from '../components/CampoTexto'
 import '../css/estilos.css'
 import { datos } from '../data/archivos_iniciales'
 import TextArea from '../components/TextArea'
 import CampoColor from '../components/CampoColor'
+import { obtenerDatos } from '../api/api'
 
 const NuevaCategoria = () =>{
+    const [categorias,setCategorias] = useState([])
+
+    useEffect(()=>{
+       obtenerDatos('/categorias', setCategorias) 
+    },[])
 
     const [nombre, setNombre] = useState('')
     const [descripcion, setDescripcion] = useState('')
@@ -105,7 +111,7 @@ const NuevaCategoria = () =>{
                         </thead>
                         <tbody>
                             {
-                                datos.categorias.map((categoria, i) => {
+                                categorias.map((categoria, i) => {
                                     return (
                                         <tr key={i}>
                                             <td>{categoria.nombre}</td>
