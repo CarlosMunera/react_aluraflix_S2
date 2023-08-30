@@ -19,9 +19,11 @@ Componentes creados para este Sprint:
 * Se genera archivo datos_iniciales.json para probar la funcionalidad del carrusel de videos. (Para el el Sprint 02 se implementará esta funcionalidad consumiendo los datos desde una API).
 
 Sprint 2:
-* Componente para registro de nueva categoria. `(En desarrollo)`
-* Componente para registro de nuevo Video. `(En desarrollo)`
 * Se implementa conexion con fake API (mackapi.io). No se requiere el uso del archivo datos_iniciales.json.
+* Componente para registro de nueva categoria.
+* Componente para registro de nuevo Video. 
+* Componente Carrusel videos en página principal (se implementa la funcionalidad de remover videos).
+
 
 ## Biliotecas utilizadas
 * React-Router-Dom.
