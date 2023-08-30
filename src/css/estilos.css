@@ -153,6 +153,13 @@ Link .hero__player{
 
 
 /* Videocard */
+.videocard_container{
+    color: #E5E5E5;
+    font-weight: bold;
+    position: relative;
+}
+
+
 .videocard{
     min-width: 436px;
     min-height: 264px;
@@ -166,6 +173,25 @@ Link .hero__player{
     object-fit: cover;
     max-width: 100%;
     max-height: 100%;
+    z-index: -1;
+}
+
+.videocard_btn{
+    font-size: 1.5rem;
+    font-weight: 700;
+    border-radius: 50%;
+    border: none;
+    box-shadow: 1px 10px 5px 5px rgba(0, 0, 0, 0.5);
+    padding: 8px;
+    text-align: right;
+    right: -10px;
+    top: -10px;
+    position: absolute;
+}
+
+.videocard_btn:hover{
+    color: #ffffff;
+    background-color: #2A7AE4;
 }
 
 /* FOOTER */
@@ -183,6 +209,7 @@ footer{
 
 /* 404 */
 .error{
+    background-color: #ffffff;
     font-family: 'Roboto', sans-serif;
     height: 100vh;
     display: flex;
@@ -255,6 +282,12 @@ body{
     border-radius: 0 0 4px 4px;
     padding: 0 10px;
     outline: none;
+}
+
+.form_btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .form__input input:focus {
@@ -347,3 +380,130 @@ table tbody Link {
     text-align: center;
 }
 
+.table_btn{
+    color: #ffffff;
+    background-color: #000000;
+    padding: 5px;
+    font-size: 25px;
+    font-weight: 300;
+    border: none;
+}
+
+
+/* MODAL */
+.modal-container {
+    position:fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.modal {
+    background-color: #E5E5E5;
+    border-radius: 5px;
+    padding: 2rem;
+    width: 30em;
+}
+
+.btn{
+    border: none;
+    color: #fff;
+    padding: 0.5rem 1.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: 0px 5px 5px #ccc;
+    font-size: 1.5rem;
+}
+
+.btn-submit{
+    background-color: #2A7AE4;
+}
+
+.btn-cancel{
+    background-color: #53585D;
+}
+
+.modal-close{
+    display: inline-block;
+    cursor: pointer;
+    font-size: 1.2rem;
+    font-weight: bold;
+    background-color: #ccc;
+    padding: 10px;
+    border-radius: 50%;
+    user-select: none;
+}
+
+.modal-close:hover{
+    color: #ffffff;
+    background-color: #2A7AE4;
+}
+
+.modal-header{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.modal-content{
+    margin-bottom: 2rem;
+}
+
+.modal-footer{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+
+/* MODAL REACT */
+/* Estilos para el overlay (fondo detrás del modal) */
+.ReactModal__Overlay {
+    background-color: rgba(0, 0, 0, 0.5); /* Color de fondo semitransparente */
+    z-index: 1000; /* Asegura que el modal esté en la parte superior */
+  }
+  
+  /* Estilos para el contenido del modal */
+  .ReactModal__Content {
+    background-color: #fff; /* Color de fondo del modal */
+    border-radius: 8px; /* Bordes redondeados */
+    padding: 20px; /* Espacio interno */
+    width: 40%; /* Ancho del modal */
+    height: 40%;
+    margin: 0 auto; /* Centrar horizontalmente */
+  }
+
+  .modal_btn{
+    border: none;
+    color: #fff;
+    padding: 0.5rem 1.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: 0px 5px 5px #ccc;
+    font-size: 1.5rem;
+  }
+
+  .Modal_footer{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+
+  }
+
+  .btn_cancel{
+    font-size: 2rem;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    border: none;
+  }
+
+  

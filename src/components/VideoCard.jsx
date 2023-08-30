@@ -1,20 +1,51 @@
 import '../css/estilos.css'
 import { Link } from 'react-router-dom'
-import { obtenerDatos } from '../api/api'
+import { obtenerDatos, eliminarDatos } from '../api/api'
 import { useEffect, useState } from 'react'
+import Modal from 'react-modal';
+
+
 
 const VideoCards = ({ url, color, nombreCategoria }) => {
     const [videos,setVideos] = useState([])
+    const [videoAEliminar,setVideoAEliminar] = useState(null)
+    const [solicitarDatosVideos,setSolicitarDatosVideos] = useState(false)
+    console.log('Voy a eliminar el video: '+videoAEliminar)
 
     useEffect(()=>{
         obtenerDatos('/videos', setVideos)
-    },[])
+        setSolicitarDatosVideos(false)
+    },[solicitarDatosVideos])
+
 
 
     let colorCard = {
         border: `2px solid ${color}`, 
-        backgroundColor: `${color}`
+        backgroundColor: `${color}`   
     }
+
+
+
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+    const openModal = (id) => {
+        setVideoAEliminar(id)
+        setModalIsOpen(true);
+        
+    };
+    const closeModal = () => {
+        setModalIsOpen(false);
+        setVideoAEliminar(null)
+    };
+
+
+    const manejarEliminar = ()=>{
+        if(videoAEliminar !== null){
+            eliminarDatos(videoAEliminar)
+            setSolicitarDatosVideos(true)
+        }
+        closeModal(); 
+    }
+
     return (
         <>
             {
@@ -22,15 +53,35 @@ const VideoCards = ({ url, color, nombreCategoria }) => {
                     const { id, urlVideo, urlImagen, categoria } = video
                     if(categoria === nombreCategoria){
                         return (
-                        <Link to={`${urlVideo}`} target="_blank" rel="noopener noreferrer" key={id}>
+                        <div className='videocard_container' key={id}>
+                            <button className='videocard_btn' onClick={() => openModal(`/videos/${id}`)}>X</button>
+                        <Link to={`${urlVideo}`} target="_blank" rel="noopener noreferrer" >
+                            
                             <div className='videocard' style={ colorCard } key={id}>
                                 <img src={`${urlImagen}`} alt="Imagen video card" key={id}/>
+                                
                             </div>
                         </Link>
+                        </div>
+                        
                         );
                     }   
                 })
             }
+            <Modal
+                isOpen={modalIsOpen}
+                onRequestClose={closeModal}
+                contentLabel="Ejemplo de Modal"
+            >   
+                <button className='btn_cancel' onClick={closeModal}>X</button>
+                <h2>Eliminar Video</h2>
+                <p>Se dispone a eliminar el video, desea continuar?</p>
+                <div className='Modal_footer'>
+                    <button className='modal_btn' onClick={manejarEliminar}>Eliminar Video</button>
+                <button className='modal_btn' onClick={closeModal}>Cancelar</button>
+                </div>
+               
+            </Modal>
         </>
         
     )

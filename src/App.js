@@ -6,6 +6,9 @@ import Page404 from './pages/Page404'
 import NuevoVideo from './pages/NuevoVideo';
 import NuevaCategoria from './pages/NuevaCategoria';
 import Footer from './components/Footer';
+import Modal from 'react-modal';
+
+Modal.setAppElement('#root'); // Define el elemento de la aplicación
 
 function App() {
   return (
@@ -21,6 +24,16 @@ function App() {
         </Routes>
         <Footer/>
       </Router>
+
+
+
+      {/* <button onClick={()=>setModalOpen(true)}>Abrir Modal</button>
+      {modalOpen &&(
+      <Modal onSubmit={null} onCancel={null} onClose={manejarModal}>
+        <h1>Eliminar Video</h1>
+        <p>¿Desea continuar con esta acción?</p>
+      </Modal>  
+      )} */}
     </div>
   );
 }

@@ -4,9 +4,11 @@ import { useEffect, useState } from "react"
 
 const ListaCategorias = () => {
     const [categorias,setCategorias] = useState([])
-    
+    const [videos,setVideos] = useState([])
+
     useEffect(()=>{
         obtenerDatos('/categorias',setCategorias)
+        obtenerDatos('/videos',setVideos)
     },[])
 
     return (
@@ -16,25 +18,28 @@ const ListaCategorias = () => {
             <div className="categorias_Listas">
                 {
                     categorias.map((categoria) => {
+
                         const {id, nombre, descripcion, color} = categoria
 
-                        let colorLista = {
-                            backgroundColor: color
+                        if (videos.some( video => video.categoria === nombre)){
+                            let colorLista = {
+                                backgroundColor: color
+                            }
+    
+                            return (
+                                    <div className="categorias__contenido container" key={id}>
+                                        <div className="categorias__titulo">
+                                            <div className="categorias__nombre" style={ colorLista }>{ nombre }</div>
+                                            <div className="categorias__descripcion">{ descripcion }</div>
+                                        </div>
+                                        <div className="categorias__listavideos">
+    
+                                            <VideoCard url='/videos' nombreCategoria={nombre} color={ color }/>
+                                            
+                                        </div>
+                                    </div>
+                            );
                         }
-
-                        return (
-                                <div className="categorias__contenido container" key={id}>
-                                    <div className="categorias__titulo">
-                                        <div className="categorias__nombre" style={ colorLista }>{ nombre }</div>
-                                        <div className="categorias__descripcion">{ descripcion }</div>
-                                    </div>
-                                    <div className="categorias__listavideos">
-
-                                        <VideoCard url='/videos' nombreCategoria={nombre} color={ color }/>
-                                        
-                                    </div>
-                                </div>
-                        );
                     })
                 }
             </div>

@@ -1,9 +1,11 @@
 import '../css/estilos.css'
 
-const ButtonForm = ({titulo, styles}) => {
-    return <input type="submit" value ={titulo} style={styles}>
-           
-        </input>
+const ButtonForm = ({tipo, titulo, styles, manejarClic}) => {
+    return <button className='btn_form' type={tipo} 
+        onClick={manejarClic}
+        style={styles}>
+           {titulo}
+        </button>
 }
 
 export default ButtonForm

@@ -2,32 +2,43 @@ import { useEffect, useState } from 'react'
 import ButtonForm from '../components/ButtonForm'
 import CampoTexto from '../components/CampoTexto'
 import '../css/estilos.css'
-import { datos } from '../data/archivos_iniciales'
 import TextArea from '../components/TextArea'
 import CampoColor from '../components/CampoColor'
-import { obtenerDatos } from '../api/api'
+import { enviarDatos, eliminarDatos, obtenerDatos } from '../api/api'
+import { v4 as uuidv4 } from 'uuid'
+import TablaCategorias from '../components/TablaCategorias'
 
 const NuevaCategoria = () =>{
-    const [categorias,setCategorias] = useState([])
-
-    useEffect(()=>{
-       obtenerDatos('/categorias', setCategorias) 
-    },[])
-
+    
+    const [datosEnviados,setDatosEnviados] = useState(false)
     const [nombre, setNombre] = useState('')
     const [descripcion, setDescripcion] = useState('')
     const [color, setColor] = useState('')
     const [codigo, setCodigo] = useState('')
  
-
     const manejarEnvio = (e) => {
         e.preventDefault()
+        const id = uuidv4()
         const datosAEnviar = {
             nombre,
             descripcion,
-            color
+            color,
+            id
         }
         console.log(datosAEnviar)
+        enviarDatos('/categorias',datosAEnviar)
+        setDatosEnviados(true)
+    }
+
+    const manejarLimpiar = () => {
+        setNombre('')
+        setDescripcion('')
+        setColor('')
+        setCodigo('')
+    }
+
+    const manejarEditar = () => {
+        
     }
 
     const EstilosBtnGuardar = {
@@ -94,36 +105,15 @@ const NuevaCategoria = () =>{
                         />
 
                         <div className="botones">
-                            <ButtonForm titulo='Guardar' styles={EstilosBtnGuardar} />
-                            <ButtonForm titulo='Limpiar' styles={EstilosBtnLimpiar} />
+                            <ButtonForm tipo='submit' titulo='Guardar' styles={EstilosBtnGuardar} />
+                            <ButtonForm tipo='reset' titulo='Limpiar' styles={EstilosBtnLimpiar} manejarClic={()=>manejarLimpiar()}/>
                         </div>
 
                     </form>
 
-                    <table>
-                        <thead>
-                            <tr>
-                                <td>Nombre</td>
-                                <td>Descripción</td>
-                                <td>Editar</td>
-                                <td>Remover</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                categorias.map((categoria, i) => {
-                                    return (
-                                        <tr key={i}>
-                                            <td>{categoria.nombre}</td>
-                                            <td>{categoria.descripcion}</td>
-                                            <td className="table__editar">Editar</td>
-                                            <td className="table__remover">Remover</td>
-                                        </tr>
-                                    )
-                                })
-                            }
-                        </tbody>
-                    </table>
+                    <TablaCategorias 
+                        datosEnviados={datosEnviados}
+                    />
 
                 </div>
             </main>

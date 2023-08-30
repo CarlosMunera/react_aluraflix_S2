@@ -1,15 +1,17 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import ButtonLink from "../components/ButtonLink"
 import ButtonForm from "../components/ButtonForm"
 import CampoTexto from "../components/CampoTexto"
 import ListaOpciones from "../components/ListaOpciones"
 import TextArea from "../components/TextArea"
+import { enviarDatos, obtenerDatos } from "../api/api"
+import { v4 as uuidv4 } from "uuid"
 
 const NuevoVideo = () =>{
 
-    const[titulo,setTitulo] = useState('')
-    const[linkVideo,setVideo] = useState('')
-    const[linkImagen,setImagen] = useState('')
+    const[nombre,setNombre] = useState('')
+    const[urlVideo,setUrlVideo] = useState('')
+    const[urlImagen,setUrlImagen] = useState('')
     const[categoria,setCategoria] = useState('')
     const[descripcion,setDescripcion] = useState('')
     const[codigoSeguridad,setCodigoSeguridad] = useState('')
@@ -17,16 +19,25 @@ const NuevoVideo = () =>{
 
     const manejarEnvio = (e) =>{
         e.preventDefault()
-        console.log('Manejar el envio')
+        const id = uuidv4()
         let datosAEnviar = {
-            titulo,
-            linkVideo,
-            linkImagen,
-            categoria,
+            nombre,
+            urlVideo,
+            urlImagen,
             descripcion,
-            codigoSeguridad
+            categoria,
+            codigoSeguridad,
+            id
         }
-        console.log(datosAEnviar)
+        enviarDatos('/videos',datosAEnviar)
+    }
+
+    const manejarLimpiar = () => {
+        setNombre('')
+        setUrlVideo('')
+        setUrlImagen('')
+        setCategoria('** Escoja una categoria **')
+        setDescripcion('')
     }
 
     const EstilosBtnNuevaCategoria = {
@@ -79,24 +90,24 @@ const NuevoVideo = () =>{
                             titulo='Título'
                             mensaje="" 
                             required={true} 
-                            valor={titulo} 
-                            actualizarValor={setTitulo} 
+                            valor={nombre} 
+                            actualizarValor={setNombre} 
                         />
                         
                         <CampoTexto 
                             titulo='Link del video' 
                             mensaje="" 
                             required={true} 
-                            valor={linkVideo} 
-                            actualizarValor={setVideo} 
+                            valor={urlVideo} 
+                            actualizarValor={setUrlVideo} 
                         />
 
                         <CampoTexto 
                             titulo='Link de la imagen del video' 
                             mensaje="" 
                             required={true} 
-                            valor={linkImagen} 
-                            actualizarValor={setImagen} 
+                            valor={urlImagen} 
+                            actualizarValor={setUrlImagen} 
                         />
 
                         <ListaOpciones 
@@ -108,7 +119,7 @@ const NuevoVideo = () =>{
                         />
 
                         <TextArea 
-                            titulo='Descripción de la categoría' 
+                            titulo='Descripción' 
                             mensaje='' 
                             required={true} 
                             valor={descripcion} 
@@ -124,8 +135,8 @@ const NuevoVideo = () =>{
 
                         <div className="barra__botones">
                             <div className="botones">
-                                <ButtonForm titulo='Guardar' styles={EstilosBtnGuardar} />
-                                <ButtonForm titulo='Limpiar' styles={EstilosBtnLimpiar} />
+                                <ButtonForm tipo='submit' titulo='Guardar' styles={EstilosBtnGuardar} />
+                                <ButtonForm tipo='reset' titulo='Limpiar' styles={EstilosBtnLimpiar} manejarClic={()=>manejarLimpiar()}/>
                             </div>
                             <ButtonLink to='/nuevacategoria' titulo='Nueva Categoría' styles={EstilosBtnNuevaCategoria}/>
                         </div>
