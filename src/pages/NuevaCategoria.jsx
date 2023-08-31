@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import ButtonForm from '../components/ButtonForm'
 import CampoTexto from '../components/CampoTexto'
 import '../css/estilos.css'
 import TextArea from '../components/TextArea'
 import CampoColor from '../components/CampoColor'
-import { enviarDatos, eliminarDatos, obtenerDatos } from '../api/api'
+import { enviarDatos, actualizarDatos } from '../api/api'
 import { v4 as uuidv4 } from 'uuid'
 import TablaCategorias from '../components/TablaCategorias'
 
@@ -16,6 +16,9 @@ const NuevaCategoria = () =>{
     const [color, setColor] = useState('')
     const [codigo, setCodigo] = useState('')
  
+    
+    
+
     const manejarEnvio = (e) => {
         e.preventDefault()
         const id = uuidv4()
@@ -27,7 +30,6 @@ const NuevaCategoria = () =>{
         }
         console.log(datosAEnviar)
         enviarDatos('/categorias',datosAEnviar)
-        setDatosEnviados(true)
     }
 
     const manejarLimpiar = () => {
@@ -37,7 +39,7 @@ const NuevaCategoria = () =>{
         setCodigo('')
     }
 
-    const manejarEditar = () => {
+    const manejarEditar = (url) => {
         
     }
 
@@ -105,7 +107,7 @@ const NuevaCategoria = () =>{
                         />
 
                         <div className="botones">
-                            <ButtonForm tipo='submit' titulo='Guardar' styles={EstilosBtnGuardar} />
+                            <ButtonForm tipo='submit' titulo='Guardar' styles={EstilosBtnGuardar}/>
                             <ButtonForm tipo='reset' titulo='Limpiar' styles={EstilosBtnLimpiar} manejarClic={()=>manejarLimpiar()}/>
                         </div>
 

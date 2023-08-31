@@ -7,7 +7,7 @@ import { obtenerDatos, eliminarDatos} from '../api/api';
 
 const TablaCategorias = (datosEnviados) => {
 
-    const [solicitarDatos,setSolicitarDatos] = useState(datosEnviados)
+    const [solicitarDatos,setSolicitarDatos] = useState(false)
     const [videos,setVideos] = useState([])
     const [categorias,setCategorias] = useState([])
    
@@ -55,7 +55,7 @@ const TablaCategorias = (datosEnviados) => {
                                         <tr key={i}>
                                             <td>{categoria.nombre}</td>
                                             <td>{categoria.descripcion}</td>
-                                            <td className="table__editar"><Link>Editar</Link></td>
+                                            <td className="table__editar" ><button type='reset' className='table_btn' >Editar</button></td>
                                             <td className="table__remover"><button type='reset' className='table_btn' onClick={()=>manejarRemover(`/categorias/${categoria.id}`,categoria.nombre)}>Remover</button></td>
                                         </tr>
                                     )

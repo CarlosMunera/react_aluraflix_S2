@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import ButtonLink from "../components/ButtonLink"
 import ButtonForm from "../components/ButtonForm"
 import CampoTexto from "../components/CampoTexto"
 import ListaOpciones from "../components/ListaOpciones"
 import TextArea from "../components/TextArea"
-import { enviarDatos, obtenerDatos } from "../api/api"
+import { enviarDatos } from "../api/api"
 import { v4 as uuidv4 } from "uuid"
 
 const NuevoVideo = () =>{

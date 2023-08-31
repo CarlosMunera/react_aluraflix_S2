@@ -21,6 +21,7 @@ Componentes creados para este Sprint:
 Sprint 2:
 * Se implementa conexion con fake API (mackapi.io). No se requiere el uso del archivo datos_iniciales.json.
 * Componente para registro de nueva categoria.
+* Funcionalidad de editar categoría. (En desarrollo). 
 * Componente para registro de nuevo Video. 
 * Componente Carrusel videos en página principal (se implementa la funcionalidad de remover videos).
 
@@ -30,7 +31,11 @@ Sprint 2:
 * Styled-components.
 * Axios.
 
+## `Importante`
+* Las tres primeras categorias o sus videos, por cuestiones de mantener el diseño como el requerido en figma no pueden ser eliminadas, para los nuevas categorias yvideos agregados posteriormente si aplican las funcionalidades de crear, editar o remover.
+
+
 ## Acerca del autor:
 
-* [Alura]()
+* [Alura - Oracle ONE](https://app.aluracursos.com/user/karlosmunera)
 * [LinkedIn](https://www.linkedin.com/in/carlos-munera-259969262 "Linkedin")

@@ -13,11 +13,16 @@ export const obtenerDatos = async (url, setData) => {
 
 export const enviarDatos = async (url, datos) => {
     try {
-        const respuesta =   await axios.post(`${baseURL}${url}`,datos)
-        alert('Datos actualizados correctamente', respuesta.data)
+        const respuesta = await api.post(url, datos); 
+        alert('Datos actualizados correctamente');
+        console.log('Respuesta del servidor:', respuesta.data); 
     } catch (error) {
-        alert('Error al actualizar los datos: ', error)
+        alert('Error al actualizar los datos: ' + error.message); 
     }
+}
+
+export const actualizarDatos = (url) => {
+    console.log(`Editando categoria ${url}`)
 }
 
 export const eliminarDatos = async (id) => {
