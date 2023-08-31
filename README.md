@@ -32,7 +32,7 @@ Sprint 2:
 * Axios.
 
 ## `Importante`
-* Las tres primeras categorias o sus videos, por cuestiones de mantener el diseño como el requerido en figma no pueden ser eliminadas, para los nuevas categorias yvideos agregados posteriormente si aplican las funcionalidades de crear, editar o remover.
+* Las tres primeras categorias o sus videos, por cuestiones de mantener el diseño como el requerido en figma no pueden ser eliminadas, para los nuevas categorias y videos agregados posteriormente si aplican las funcionalidades de crear, editar o remover.
 
 
 ## Acerca del autor:
