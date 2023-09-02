@@ -73,12 +73,17 @@ const VideoCards = ({ url, color, nombreCategoria }) => {
                 onRequestClose={closeModal}
                 contentLabel="Ejemplo de Modal"
             >   
-                <button className='btn_cancel' onClick={closeModal}>X</button>
-                <h2>Eliminar Video</h2>
-                <p>Se dispone a eliminar el video, desea continuar?</p>
+                <div className='modal_header'>
+                    <button className='btn_cancel' onClick={closeModal}>X</button>
+                </div>
+                <div className='modal_content'>
+                    <h2>Eliminar Video</h2>
+                    <p>Se dispone a eliminar el video, desea continuar?</p>
+                </div>
+                
                 <div className='Modal_footer'>
-                    <button className='modal_btn' onClick={manejarEliminar}>Eliminar Video</button>
-                <button className='modal_btn' onClick={closeModal}>Cancelar</button>
+                    <button className='modal_btn modal_btn-ok' onClick={manejarEliminar}>Eliminar Video</button>
+                <button className='modal_btn modal_btn-no' onClick={closeModal}>Cancelar</button>
                 </div>
                
             </Modal>

@@ -14,7 +14,7 @@ const ListaCategorias = () => {
     return (
         <main className="categorias">
             <h1 className="sr-only">Lista Categorias videos</h1>
-            <p className="sr-only">AluraFlix plataforma para registrar y ver nueestros videos favoritos</p>
+            <p className="sr-only">AluraFlix plataforma para registrar y ver nuestros videos favoritos</p>
             <div className="categorias_Listas">
                 {
                     categorias.map((categoria) => {

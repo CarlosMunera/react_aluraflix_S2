@@ -1,22 +1,9 @@
 import '../css/estilos.css'
-import { Link } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import { obtenerDatos, eliminarDatos} from '../api/api';
+import { eliminarDatos} from '../api/api';
 
 
 
-const TablaCategorias = (datosEnviados) => {
-
-    const [solicitarDatos,setSolicitarDatos] = useState(false)
-    const [videos,setVideos] = useState([])
-    const [categorias,setCategorias] = useState([])
-   
-    useEffect(() => {
-        obtenerDatos('/videos',setVideos)
-        obtenerDatos('/categorias',setCategorias)
-        setSolicitarDatos(false)
-    },[solicitarDatos])
-
+const TablaCategorias = ({videos, categorias, setSolicitarDatos, manejarEditar}) => {
     
     const manejarRemover = (url,nombreCategoria) => {
         if(videos.some( video => video.categoria === nombreCategoria)){
@@ -26,16 +13,6 @@ const TablaCategorias = (datosEnviados) => {
             alert('¡Categoria Eliminada!...')
             setSolicitarDatos(true)
         }
-        
-        
-        // if (VideoEnCategoria){
-        //     
-        // }else {
-        //     eliminarDatos(id)
-        //     setActualizarDatos(true)
-        // }
-
-        
     }
 
     return (
@@ -55,7 +32,7 @@ const TablaCategorias = (datosEnviados) => {
                                         <tr key={i}>
                                             <td>{categoria.nombre}</td>
                                             <td>{categoria.descripcion}</td>
-                                            <td className="table__editar" ><button type='reset' className='table_btn' >Editar</button></td>
+                                            <td className="table__editar" ><button type='reset' className='table_btn' onClick={()=>manejarEditar(categoria.id, categoria.nombre, categoria.descripcion, categoria.color, categoria.codigo)}>Editar</button></td>
                                             <td className="table__remover"><button type='reset' className='table_btn' onClick={()=>manejarRemover(`/categorias/${categoria.id}`,categoria.nombre)}>Remover</button></td>
                                         </tr>
                                     )

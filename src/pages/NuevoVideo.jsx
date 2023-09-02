@@ -17,6 +17,14 @@ const NuevoVideo = () =>{
     const[codigoSeguridad,setCodigoSeguridad] = useState('')
     
 
+    const manejarLimpiar = () => {
+        setNombre('')
+        setUrlVideo('')
+        setUrlImagen('')
+        setCategoria('** Escoja una categoria **')
+        setDescripcion('')
+    }
+
     const manejarEnvio = (e) =>{
         e.preventDefault()
         const id = uuidv4()
@@ -30,14 +38,7 @@ const NuevoVideo = () =>{
             id
         }
         enviarDatos('/videos',datosAEnviar)
-    }
-
-    const manejarLimpiar = () => {
-        setNombre('')
-        setUrlVideo('')
-        setUrlImagen('')
-        setCategoria('** Escoja una categoria **')
-        setDescripcion('')
+        manejarLimpiar()
     }
 
     const EstilosBtnNuevaCategoria = {

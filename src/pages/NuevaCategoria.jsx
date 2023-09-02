@@ -1,46 +1,77 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import ButtonForm from '../components/ButtonForm'
 import CampoTexto from '../components/CampoTexto'
 import '../css/estilos.css'
 import TextArea from '../components/TextArea'
 import CampoColor from '../components/CampoColor'
-import { enviarDatos, actualizarDatos } from '../api/api'
+import { enviarDatos, obtenerDatos } from '../api/api'
 import { v4 as uuidv4 } from 'uuid'
 import TablaCategorias from '../components/TablaCategorias'
 
 const NuevaCategoria = () =>{
     
-    const [datosEnviados,setDatosEnviados] = useState(false)
     const [nombre, setNombre] = useState('')
     const [descripcion, setDescripcion] = useState('')
     const [color, setColor] = useState('')
     const [codigo, setCodigo] = useState('')
+
+    const [videos, setVideos] = useState([])
+    const [categorias,setCategorias] = useState([])
+
  
+    const [solicitarDatos, setSolicitarDatos] = useState(false)
     
+    useEffect(() => {
+            obtenerDatos('/videos',setVideos)
+            obtenerDatos('/categorias',setCategorias)
+            setSolicitarDatos(false)
+        },[solicitarDatos])
     
+     const manejarLimpiar = () => {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+            setNombre('')
+            setDescripcion('')
+            setColor('')
+            setCodigo('')
+    }
 
     const manejarEnvio = (e) => {
         e.preventDefault()
+        
         const id = uuidv4()
         const datosAEnviar = {
             nombre,
             descripcion,
             color,
+            codigo,
             id
         }
-        console.log(datosAEnviar)
-        enviarDatos('/categorias',datosAEnviar)
-    }
 
-    const manejarLimpiar = () => {
-        setNombre('')
-        setDescripcion('')
-        setColor('')
-        setCodigo('')
-    }
+        if(categorias.some((categoria) => categoria.nombre.toLowerCase() === datosAEnviar.nombre.toLowerCase()))
+        {
+            alert('Ya existe una categoría con ese nombre, favor verificar en la tabla inferior')
+        }else {
+            console.log(datosAEnviar)
+            enviarDatos('/categorias',datosAEnviar);
+            setSolicitarDatos(true);
+            manejarLimpiar()
+        }
 
-    const manejarEditar = (url) => {
         
+    }
+
+    
+
+    const manejarEditar = (id, nombre, descripcion, color, codigo) => {
+        const formulario = document.querySelector('form')
+        
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        //formulario.scrollIntoView({ behavior: "smooth" });
+        
+        setNombre(nombre);
+        setDescripcion(descripcion);
+        setColor(color);
+        setCodigo(codigo)
     }
 
     const EstilosBtnGuardar = {
@@ -74,7 +105,8 @@ const NuevaCategoria = () =>{
                     <h2 className="nuevovideo__titulo">Nueva Categoría</h2>
                     <form className='form' action="" onSubmit={manejarEnvio}>
                         
-                        <CampoTexto 
+                        <CampoTexto
+                            id='txt1'
                             titulo='Nombre' 
                             error='' 
                             required 
@@ -114,7 +146,10 @@ const NuevaCategoria = () =>{
                     </form>
 
                     <TablaCategorias 
-                        datosEnviados={datosEnviados}
+                        videos={videos}
+                        categorias={categorias}
+                        setSolicitarDatos={()=>setSolicitarDatos(true)}
+                        manejarEditar={manejarEditar}
                     />
 
                 </div>

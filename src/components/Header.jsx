@@ -6,7 +6,7 @@ import ButtonLink from './ButtonLink'
 const Header = ()=> {
 
     const EstilosBtnNuevoVideo = {
-            display: 'inline-block',
+          
             color: '#F5F5F5',
             backgroundColor: '#000000',
             border: '1px solid #F5F5F5',
