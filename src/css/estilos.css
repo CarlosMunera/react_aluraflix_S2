@@ -670,7 +670,7 @@ table tbody Link {
     border-radius: 8px; /* Bordes redondeados */
     padding: 20px; /* Espacio interno */
     width: 40%; /* Ancho del modal */
-    height: 50%;
+    height: 30%;
     margin: 0 auto; /* Centrar horizontalmente */
   }
 

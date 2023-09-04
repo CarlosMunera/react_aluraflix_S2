@@ -4,8 +4,6 @@ import { obtenerDatos, eliminarDatos } from '../api/api'
 import { useEffect, useState } from 'react'
 import Modal from 'react-modal';
 
-
-
 const VideoCards = ({ url, color, nombreCategoria }) => {
     const [videos,setVideos] = useState([])
     const [videoAEliminar,setVideoAEliminar] = useState(null)
@@ -83,9 +81,8 @@ const VideoCards = ({ url, color, nombreCategoria }) => {
                 
                 <div className='Modal_footer'>
                     <button className='modal_btn modal_btn-ok' onClick={manejarEliminar}>Eliminar Video</button>
-                <button className='modal_btn modal_btn-no' onClick={closeModal}>Cancelar</button>
+                    <button className='modal_btn modal_btn-no' onClick={closeModal}>Cancelar</button>
                 </div>
-               
             </Modal>
         </>
         

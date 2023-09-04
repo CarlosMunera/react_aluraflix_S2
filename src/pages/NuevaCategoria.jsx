@@ -4,7 +4,7 @@ import CampoTexto from '../components/CampoTexto'
 import '../css/estilos.css'
 import TextArea from '../components/TextArea'
 import CampoColor from '../components/CampoColor'
-import { enviarDatos, obtenerDatos } from '../api/api'
+import { actualizarDatos, enviarDatos, obtenerDatos } from '../api/api'
 import { v4 as uuidv4 } from 'uuid'
 import TablaCategorias from '../components/TablaCategorias'
 
@@ -14,6 +14,7 @@ const NuevaCategoria = () =>{
     const [descripcion, setDescripcion] = useState('')
     const [color, setColor] = useState('')
     const [codigo, setCodigo] = useState('')
+    const [idActualizar, setIdActualizar] = useState('11')
 
     const [videos, setVideos] = useState([])
     const [categorias,setCategorias] = useState([])
@@ -49,7 +50,19 @@ const NuevaCategoria = () =>{
 
         if(categorias.some((categoria) => categoria.nombre.toLowerCase() === datosAEnviar.nombre.toLowerCase()))
         {
-            alert('Ya existe una categoría con ese nombre, favor verificar en la tabla inferior')
+            const url = `'/categorias/${idActualizar}'`
+            console.log(url)
+
+            const datosAActualizar = {
+                id: idActualizar,
+                nombre,
+                descripcion,
+                color,
+                codigo,
+            }
+
+            actualizarDatos(url,datosAActualizar)
+            // alert('Ya existe una categoría con ese nombre, favor verificar en la tabla inferior')
         }else {
             console.log(datosAEnviar)
             enviarDatos('/categorias',datosAEnviar);
@@ -60,18 +73,20 @@ const NuevaCategoria = () =>{
         
     }
 
-    
-
     const manejarEditar = (id, nombre, descripcion, color, codigo) => {
         const formulario = document.querySelector('form')
         
         window.scrollTo({ top: 0, behavior: "smooth" });
         //formulario.scrollIntoView({ behavior: "smooth" });
         
+       
+            
         setNombre(nombre);
         setDescripcion(descripcion);
         setColor(color);
         setCodigo(codigo)
+
+
     }
 
     const EstilosBtnGuardar = {

@@ -7,8 +7,12 @@ const api = axios.create({
 });
 
 export const obtenerDatos = async (url, setData) => {
-    const respuesta = await api.get(`${baseURL}${url}`)
-    setData(respuesta.data)
+    try {
+        const respuesta = await api.get(`${baseURL}${url}`)
+        setData(respuesta.data)
+    } catch (error) {
+        alert('Error al consultar los datos: ' + error.message); 
+    }
 }
 
 export const enviarDatos = async (url, datos) => {
@@ -21,15 +25,21 @@ export const enviarDatos = async (url, datos) => {
     }
 }
 
-export const actualizarDatos = (url) => {
-    console.log(`Editando categoria ${url}`)
+export const actualizarDatos = async (url, datos) => {
+    try {
+        const respuesta = await api.put(url, datos); 
+        alert('Datos actualizados correctamente');
+        console.log('Respuesta del servidor:', respuesta.data);
+    } catch (error) {
+        alert('Error al actualizar los datos: ' + error.message);
+    }
 }
 
 export const eliminarDatos = async (id) => {
     try {
         const respuesta = await axios.delete(`${baseURL}${id}`)
         console.log(`${baseURL}${id}`)
-        alert('Los datos se han eliminado!',respuesta,`${baseURL}${id}`)
+        // alert('Los datos se han eliminado!',respuesta,`${baseURL}${id}`)
     } catch (error) {
         alert('Error al eliminar los datos')
     }
